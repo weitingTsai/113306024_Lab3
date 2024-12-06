@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Number Guessing Game</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <h1>113306024_Lab3_Number Guessing Game</h1>
+  <div id="result"></div>
+  <script>
+var answer = Math.floor(Math.random() * 100) + 1;
+var attempts = 7;
+var min = 1;
+var max = 100;
+
+while (attempts > 0) {
+  var input = window.prompt(
+    `請輸入範圍 ${min} ~ ${max} 的數字。\n剩餘次數：${attempts}`
+  );
+
+  if (!input || isNaN(input)) {
+    alert("請輸入有效的數字！");
+    continue;
+  }
+
+  var guess = parseInt(input, 10);
+
+  if (guess <= min || guess >= max) {
+    alert("輸入超出範圍，請重新輸入！");
+    continue;
+  }
+
+  attempts--;
+
+  if (guess === answer) {
+    alert("恭喜你，猜中了！");
+    document.getElementById("result").innerHTML =
+      '<img src="correct.jpg" alt="You guessed correctly!">';
+    break;
+  } else if (guess < answer) {
+    min = Math.max(min, guess);
+  } else {
+    max = Math.min(max, guess);
+  }
+
+  if (attempts == 0) {
+    alert(`遊戲結束！正確答案是 ${answer}。`);
+    document.getElementById("result").innerHTML =
+      '<img src="wrong.jpg" alt="Game Over">';
+  }
+}
+
+  </script>
+</body>
+</html>
+
